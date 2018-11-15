@@ -1,0 +1,16 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es5",
+        "jsx": "react",
+        "rootDir": ".",
+        "outDir": "dist",
+        "noImplicitAny": false,
+        "sourceMap": false,
+        "allowSyntheticDefaultImports": true,
+        "allowJs": true,
+        "moduleResolution": "node",
+        "lib": ["es2015", "es2017", "dom"]
+    },
+    "exclude": ["node_modules", "webpack.config.js"]
+}
