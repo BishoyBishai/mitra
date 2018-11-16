@@ -3,5 +3,5 @@ export const PATHS = {
   LOGIN: `/sign-in`,
   SIGN_UP: `/sign-up`,
   PRODUCTS: `/products`,
-  PRODUCT: `/products/:pid`,
+  PRODUCT: (pid=':pid') => `/products/${pid}`,
 };

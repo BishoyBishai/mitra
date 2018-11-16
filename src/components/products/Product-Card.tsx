@@ -1,5 +1,7 @@
 import * as React from "react";
 import { Card, Image, Icon } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
+import { PATHS } from "../../router/routes";
 
 const ProductCard = () => {
   return (
@@ -17,10 +19,10 @@ const ProductCard = () => {
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
-        <a>
+        <NavLink exact activeClassName="active" to={PATHS.PRODUCT()}>
           <Icon name="add" />
           Show Details
-        </a>
+        </NavLink>
       </Card.Content>
     </Card>
   );

@@ -32,7 +32,7 @@ const SignUp = () => {
                 placeholder="E-mail address"
               />
               <Form.Input
-                icon="lock icon"
+                icon="lock"
                 iconPosition="left"
                 label="Your Password:"
                 type="password"

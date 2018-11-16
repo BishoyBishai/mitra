@@ -23,7 +23,7 @@ const Login = () => {
                 placeholder="E-mail address"
               />
               <Form.Input
-                icon="lock icon"
+                icon="lock"
                 iconPosition="left"
                 type="password"
                 name="password"
