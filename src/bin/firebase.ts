@@ -1,6 +1,6 @@
 import config from "../config/config";
 import firebase from "firebase/app";
-import "firebase/store";
+import "firebase/firestore";
 import "firebase/auth";
 
 firebase.initializeApp(config.firebase);
