@@ -1,6 +1,9 @@
 import * as React from "react";
 import { Segment, Grid, Header, Message, Form, Button } from "semantic-ui-react";
+import { NavLink } from "react-router-dom";
+
 import './style.scss';
+import { PATHS } from "../../router/routes";
 const Login = () => {
   return (
     <div className="login-page">
@@ -36,9 +39,7 @@ const Login = () => {
 
           <Message>
             New to us?{" "}
-            <a href="">
-              Register
-            </a>
+            <NavLink to={PATHS.SIGN_UP} >Sign up</NavLink>
           </Message>
         </Grid.Column>
       </Grid>
