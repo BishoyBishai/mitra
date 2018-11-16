@@ -1,11 +1,11 @@
 import * as React from "react";
 import "semantic-ui-css/semantic.min.css";
 import NavBar from "./layout/nav-bar";
-import ProductsList from "./products/Products-List";
-import Product from "./products/Product";
+import ProductsList from "./products/products-container";
+import Product from "./products/product";
 import { Segment } from "semantic-ui-react";
-import Login from "./auth/Login";
-import SignUp from "./auth/Signup";
+import Login from "./auth/login";
+import SignUp from "./auth/signup";
 import { Switch, Route } from "react-router";
 import { PATHS } from "../router/routes";
 class App extends React.Component {
