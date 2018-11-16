@@ -1,3 +1,7 @@
 export const PATHS = {
-  INDEX: `/`
+  INDEX: `/`,
+  LOGIN: `/sign-in`,
+  SIGN_UP: `/sign-up`,
+  PRODUCTS: `/products`,
+  PRODUCT: `/products/:pid`,
 };
