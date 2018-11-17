@@ -3,6 +3,8 @@ import { Card, Image, Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import { PATHS } from "../../../router/routes";
 import { IProduct } from "../product-modal";
+import { geCalenderDate } from "../../../helper/date";
+
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   return (
@@ -10,7 +12,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
       <Card.Content>
         <Image floated="right" size="mini" src={product.image} />
         <Card.Header>{product.title}</Card.Header>
-        <Card.Meta>{}</Card.Meta>
+        <Card.Meta>{geCalenderDate(product.date_created)}</Card.Meta>
         <Card.Description>{product.description}</Card.Description>
       </Card.Content>
       <Card.Content extra>
