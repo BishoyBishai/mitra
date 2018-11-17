@@ -1,8 +1,8 @@
 import * as React from "react";
 import { Card, Image, Icon } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
-import { PATHS } from "../../router/routes";
-import { IProduct } from "./product-modal";
+import { PATHS } from "../../../router/routes";
+import { IProduct } from "../product-modal";
 
 const ProductCard = ({ product }: { product: IProduct }) => {
   return (

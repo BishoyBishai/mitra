@@ -1,10 +1,10 @@
-import { IStore } from "../../bin/store-modal";
+import { IStore } from "./../../../bin/store-modal";
 import { connect } from "react-redux";
 import ProductsList from "./Products-List";
-import { dismiss } from "./product-actions/product-layout";
+import { dismiss } from "./../product-actions/product-layout";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
-import config from "../../config/config";
+import config from "./../../../config/config";
 import * as _ from "lodash";
 
 const mapStateToProps = (store: IStore) => {
