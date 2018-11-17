@@ -13,16 +13,18 @@ export enum ISortedByEnum {
   DATE = "Date",
 }
 
+export interface IFilters {
+  onlyMe: boolean;
+  sortedBy: ISortedByEnum;
+  sortedByDirection: number;
+  filterByKeyWord: string;
+}
+
 export interface IProductState {
   products: IProduct[];
   productsState: string;
   productError;
-  filters: {
-    onlyMe: boolean;
-    sortedBy: ISortedByEnum;
-    sortedByDirection: number;
-    filterByKeyWord: string;
-  };
+  filters: IFilters
 }
 
 export interface IProductsProps {

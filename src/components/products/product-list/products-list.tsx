@@ -4,11 +4,10 @@ import ProductCard from "./product-card";
 import { IProductsProps } from "../product-modal";
 import ProductsFilter from "../products-filters/products-filters-container";
 import ProductsPagination from "../products-pagination";
-import PageLoader from "../../layout/loader/loader";
 
 const ProductsList = (props: IProductsProps) => {
   const { message, error, dismiss, products } = props;
-  return products.length > 0 ? (
+  return (
     <div className="products-list">
       {message && (
         <Message
@@ -35,8 +34,6 @@ const ProductsList = (props: IProductsProps) => {
         </Grid.Column>
       </Grid>
     </div>
-  ) : (
-    <PageLoader />
   );
 };
 

@@ -13,7 +13,7 @@ const ProductCard = ({ product }: { product: IProduct }) => {
         <Image floated="right" size="mini" src={product.image} />
         <Card.Header>{product.title}</Card.Header>
         <Card.Meta>{geCalenderDate(product.date_created)}</Card.Meta>
-        <Card.Description>{product.description}</Card.Description>
+        <Card.Description>{product.price}</Card.Description>
       </Card.Content>
       <Card.Content extra>
         <NavLink exact activeClassName="active" to={PATHS.PRODUCT(product.id)}>

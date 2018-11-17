@@ -35,7 +35,6 @@ const ProductsFilter = (props: IProductsFilters) => {
       </Menu.Item>
       <Dropdown
         selection
-        clearable
         placeholder="Sort By"
         fluid
         onChange={e => {

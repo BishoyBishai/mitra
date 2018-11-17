@@ -6,11 +6,14 @@ import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import config from "./../../../config/config";
 import * as _ from "lodash";
+import { filterProduct } from "../helpers/filterProduct";
 
 const mapStateToProps = (store: IStore) => {
   const products = _.get(store, "firestore.ordered.products", []);
+  const uid = _.get(store, "firebase.auth.uid");
+  const fillers = store.products.filters;
   return {
-    products:products,
+    products: filterProduct(products, fillers, uid),
     message: store.products.productsState,
     error: store.products.productError,
   };
