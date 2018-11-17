@@ -1,5 +1,7 @@
+import { PATHS } from "./../../../router/routes";
 import constants from "../products-constants";
 import { getReduxAction } from "../../../helper/redux";
+import { push } from "react-router-redux";
 
 export const dismiss = () => {
   return dispatch => {
@@ -19,5 +21,12 @@ export const toggleOnlyMe = () => {
 export const changeSortedBy = key => {
   return dispatch => {
     dispatch(getReduxAction(constants.CHANGE_SORTED_BY, key));
+  };
+};
+
+export const paginate = page => {
+  return dispatch => {
+    dispatch(push({ pathname: PATHS.PRODUCTS, search: `page=${page}` }));
+    dispatch(getReduxAction(constants.CHANGE_ACTIVE_PAGE, page));
   };
 };

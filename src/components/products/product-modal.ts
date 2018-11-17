@@ -24,14 +24,19 @@ export interface IProductState {
   products: IProduct[];
   productsState: string;
   productError;
-  filters: IFilters
+  filters: IFilters;
+  activePage: number;
 }
 
 export interface IProductsProps {
   products: IProduct[];
   dismiss;
+  paginate;
   message: string;
   error: string;
+  isPaginatedPage: boolean;
+  totalPages: number;
+  activePage: number;
 }
 
 export interface IProductFrom {

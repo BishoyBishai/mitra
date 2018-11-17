@@ -11,6 +11,7 @@ const initState: IProductState = {
     sortedByDirection: 1,
     filterByKeyWord: null,
   },
+  activePage: 1,
 };
 
 const productReducer = (state = initState, action): IProductState => {
@@ -63,6 +64,12 @@ const productReducer = (state = initState, action): IProductState => {
               ? -1 * sortedByDirection
               : sortedByDirection,
         },
+      };
+    }
+    case constants.CHANGE_ACTIVE_PAGE: {
+      return {
+        ...state,
+        activePage: action.payload,
       };
     }
   }

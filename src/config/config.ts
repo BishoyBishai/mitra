@@ -13,5 +13,6 @@ const config = {
     users: "users",
     products: "products",
   },
+  productsPerPage: 15,
 };
 export default config;
