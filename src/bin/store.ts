@@ -18,6 +18,10 @@ const middleware = compose(
     createLogger(),
   ),
   reduxFirestore(fb),
-  reactReduxFirebase(fb,{}),
+  reactReduxFirebase(fb, {
+    userProfile: "users",
+    useFirestoreForProfile: true,
+    attachAuthIsReady:true
+  }),
 );
 export const store = createStore(reducers, middleware);

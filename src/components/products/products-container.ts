@@ -12,5 +12,5 @@ const stateDispatchToProps = dispatch => {};
 
 export default connect(
   stateMapToProps,
-  stateDispatchToProps,
+  null,
 )(ProductsList);

@@ -1,4 +1,5 @@
 const config = {
+  cookie: "Authorization",
   firebase: {
     apiKey: "AIzaSyCLh0EoFRZv13CcMd4tgamKEV5krUf0R1k",
     authDomain: "mitra-3241e.firebaseapp.com",
@@ -8,4 +9,4 @@ const config = {
     messagingSenderId: "782072078561",
   },
 };
-export default config; 
+export default config;

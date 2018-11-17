@@ -1,30 +1,64 @@
 import * as React from "react";
 import "semantic-ui-css/semantic.min.css";
-import NavBar from "./layout/nav-bar";
+import NavBar from "./layout/nav-bar/nav-bar-container";
 import ProductsList from "./products/products-container";
 import Product from "./products/product";
 import { Segment } from "semantic-ui-react";
-import Login from "./auth/login";
+import Login from "./auth/Login/login-container";
 import SignUp from "./auth/signup";
 import { Switch, Route } from "react-router";
 import { PATHS } from "../router/routes";
-class App extends React.Component {
+import { PrivateRoute, LoginRoute } from "./common/authRoute";
+import { connect } from "react-redux";
+import { IStore } from "../bin/store-modal";
+class App extends React.Component<{ firebase }> {
   render() {
+    const { firebase } = this.props;
     return (
       <div>
         <NavBar />
         <Segment basic>
           <Switch>
-            <Route exact path={PATHS.INDEX} component={ProductsList} />
-            <Route path={PATHS.LOGIN} component={Login} />
-            <Route path={PATHS.SIGN_UP} component={SignUp} />
-            <Route exact path={PATHS.PRODUCTS} component={ProductsList} />
-            <Route path={PATHS.PRODUCT()} component={Product} />
+            <PrivateRoute
+              firebase={firebase}
+              exact
+              path={PATHS.INDEX}
+              component={ProductsList}
+            />
+            <LoginRoute
+              firebase={firebase}
+              path={PATHS.LOGIN}
+              component={Login}
+            />
+            <LoginRoute
+              firebase={firebase}
+              path={PATHS.SIGN_UP}
+              component={SignUp}
+            />
+            <PrivateRoute
+              firebase={firebase}
+              exact
+              path={PATHS.PRODUCTS}
+              component={ProductsList}
+            />
+            <PrivateRoute
+              firebase={firebase}
+              exact
+              path={PATHS.MY_PRODUCTS}
+              component={ProductsList}
+            />
+            <PrivateRoute
+              firebase={firebase}
+              path={PATHS.PRODUCT()}
+              component={Product}
+            />
           </Switch>
         </Segment>
       </div>
     );
   }
 }
-
-export default App;
+const mapStateToProps = (state: IStore) => ({
+  firebase: state.firebase,
+});
+export default connect(mapStateToProps)(App);
