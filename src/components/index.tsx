@@ -45,12 +45,6 @@ class App extends React.Component<{ firebase }> {
             <PrivateRoute
               firebase={firebase}
               exact
-              path={PATHS.MY_PRODUCTS}
-              component={ProductsList}
-            />
-            <PrivateRoute
-              firebase={firebase}
-              exact
               path={PATHS.CREATE_PRODUCT}
               component={ProductForm}
             />

@@ -7,11 +7,22 @@ export interface IProduct {
   date_created: string;
   uid: string;
 }
+export enum ISortedByEnum {
+  PRICE = "Price",
+  TITLE = "Title",
+  DATE = "Date",
+}
 
 export interface IProductState {
   products: IProduct[];
   productsState: string;
   productError;
+  filters: {
+    onlyMe: boolean;
+    sortedBy: ISortedByEnum;
+    sortedByDirection: number;
+    filterByKeyWord: string;
+  };
 }
 
 export interface IProductsProps {
@@ -26,4 +37,13 @@ export interface IProductFrom {
   dismiss;
   message: string;
   error: string;
+}
+
+export interface IProductsFilters {
+  filterBy: string;
+  onlyMe: boolean;
+  sortedBy: ISortedByEnum;
+  changeFilterBy;
+  toggleOnlyMe;
+  changeSortedBy;
 }

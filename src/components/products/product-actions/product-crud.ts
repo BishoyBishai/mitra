@@ -3,9 +3,10 @@ import constants from "../products-constants";
 import config from "../../../config/config";
 import { push } from "react-router-redux";
 import { PATHS } from "../../../router/routes";
+import { getReduxAction } from "../../../helper/redux";
 
 export function create(product) {
-  return (dispatch, getState, {  getFirestore }) => {
+  return (dispatch, getState, { getFirestore }) => {
     const fs = getFirestore();
     const uid = (getState() as IStore).firebase.auth.uid;
     fs.collection(config.collections.products)
@@ -15,17 +16,16 @@ export function create(product) {
         uid,
       })
       .then(() => {
-        dispatch({ type: constants.ADD_PRODUCT_SUCCESS });
-        dispatch(push(PATHS.MY_PRODUCTS));
+        dispatch(getReduxAction(constants.ADD_PRODUCT_SUCCESS));
+        dispatch(push(PATHS.PRODUCTS));
       })
       .catch(err => {
-        dispatch({
-          type: constants.PRODUCT_FAILED,
-          payload: {
+        dispatch(
+          getReduxAction(constants.PRODUCT_FAILED, {
             err,
             message: "error occurred during creating new product",
-          },
-        });
+          }),
+        );
       });
   };
 }

@@ -2,6 +2,7 @@ import { IUSer } from "./auth-modals";
 import constants from "./auth-constants";
 import { push } from "react-router-redux";
 import { PATHS } from "../../router/routes";
+import { getReduxAction } from "../../helper/redux";
 
 export function signIn(credentials) {
   return (dispatch, getState, { getFirebase }) => {
@@ -9,11 +10,11 @@ export function signIn(credentials) {
     fb.auth()
       .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(key => {
-        dispatch({ type: constants.LOGIN_SUCCESS });
+        dispatch(getReduxAction(constants.LOGIN_SUCCESS));
         dispatch(push(PATHS.INDEX));
       })
       .catch(err => {
-        dispatch({ type: constants.LOGIN_FAILED, payload: err });
+        dispatch(getReduxAction(constants.LOGIN_FAILED, err));
       });
   };
 }
@@ -24,17 +25,16 @@ export function signUp(user: IUSer) {
     fb.auth()
       .createUserWithEmailAndPassword(user.email, user.password)
       .then(u => {
-        console.log(u);
         return fs
           .collection("users")
           .doc(u.user.uid)
           .set({ displayName: user.displayName });
       })
       .then(() => {
-        dispatch({ type: constants.SIGN_UP_SUCCESS });
+        dispatch(getReduxAction(constants.SIGN_UP_SUCCESS));
       })
       .catch(err => {
-        dispatch({ type: constants.SIGN_UP_FAILED, payload: err });
+        dispatch(getReduxAction(constants.SIGN_UP_FAILED, err));
       });
   };
 }

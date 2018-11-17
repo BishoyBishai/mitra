@@ -15,26 +15,11 @@ const NavBar = props => {
       </Menu.Item>
       {authState && (
         <Menu.Menu>
-          <Dropdown item text="Products">
-            <Dropdown.Menu>
-              <Dropdown.Item>
-                <NavLink exact activeClassName="active" to={PATHS.PRODUCTS}>
-                  List All
-                </NavLink>
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <NavLink exact activeClassName="active" to={PATHS.MY_PRODUCTS}>
-                  My Product
-                </NavLink>
-              </Dropdown.Item>
-              <Dropdown.Item>
-                <NavLink exact activeClassName="active" to={PATHS.PRODUCTS}>
-                  Add New
-                </NavLink>
-              </Dropdown.Item>
-            </Dropdown.Menu>
-          </Dropdown>
-          <Menu.Item name="control panel">Control Panel</Menu.Item>
+          <Menu.Item name="sign-in">
+            <NavLink exact activeClassName="active" to={PATHS.PRODUCTS}>
+              Products
+            </NavLink>
+          </Menu.Item>
         </Menu.Menu>
       )}
       {authState ? (

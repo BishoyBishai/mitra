@@ -2,7 +2,7 @@ import * as React from "react";
 import { Card, Grid, Segment, Message } from "semantic-ui-react";
 import ProductCard from "./product-card";
 import { IProductsProps } from "../product-modal";
-import ProductsFilter from "../products-filters";
+import ProductsFilter from "../products-filters/products-filters-container";
 import ProductsPagination from "../products-pagination";
 import PageLoader from "../../layout/loader/loader";
 
