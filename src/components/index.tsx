@@ -1,7 +1,7 @@
 import * as React from "react";
 import "semantic-ui-css/semantic.min.css";
 import NavBar from "./layout/nav-bar/nav-bar-container";
-import ProductsList from "./products/products-container";
+import ProductsList from "./products/products-list-container";
 import Product from "./products/product";
 import { Segment } from "semantic-ui-react";
 import Login from "./auth/Login/login-container";

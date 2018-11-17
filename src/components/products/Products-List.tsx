@@ -1,20 +1,31 @@
 import * as React from "react";
-import { Card, Grid, Segment } from "semantic-ui-react";
+import { Card, Grid, Segment, Message } from "semantic-ui-react";
 import ProductCard from "./product-card";
 import { IProductsProps } from "./product-modal";
 import ProductsFilter from "./products-filters";
 import ProductsPagination from "./products-pagination";
 
 const ProductsList = (props: IProductsProps) => {
+  const { message, error, dismiss } = props;
   return (
     <div className="products-list">
+      {message && (
+        <Message
+          onDismiss={dismiss.bind(this)}
+          negative={error != null}
+          positive={error == null}
+        >
+          <Message.Header>{message}</Message.Header>
+        </Message>
+      )}
       <Grid columns="equal">
         <Grid.Column width="3">
           <ProductsFilter />
         </Grid.Column>
         <Grid.Column>
           <Card.Group stackable itemsPerRow="3">
-            {props.products.map(product => (
+            {props.products.map((product) => (
+          
               <ProductCard product={product} key={product.id} />
             ))}
           </Card.Group>

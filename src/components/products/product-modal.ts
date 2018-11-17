@@ -16,6 +16,9 @@ export interface IProductState {
 
 export interface IProductsProps {
   products: IProduct[];
+  dismiss;
+  message: string;
+  error: string;
 }
 
 export interface IProductFrom {
