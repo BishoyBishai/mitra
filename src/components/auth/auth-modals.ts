@@ -7,7 +7,11 @@ export interface ICredentials {
   email: string;
 }
 
-export interface ILoginProps{
-  login,
-  authError
+export interface ILoginProps {
+  login;
+  authError;
+}
+
+export interface IUSer extends ICredentials {
+  displayName: string;
 }

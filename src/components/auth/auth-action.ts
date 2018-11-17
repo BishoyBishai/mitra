@@ -1,3 +1,4 @@
+import { IUSer } from "./auth-modals";
 import constants from "./auth-constants";
 import { push } from "react-router-redux";
 import { PATHS } from "../../router/routes";
@@ -16,17 +17,18 @@ export function signIn(credentials) {
       });
   };
 }
-export function signUp(user) {
+export function signUp(user: IUSer) {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     const fb = getFirebase();
     const fs = getFirestore();
     fb.auth()
       .createUserWithEmailAndPassword(user.email, user.password)
       .then(u => {
+        console.log(u);
         return fs
           .collection("users")
-          .doc(u.user.id)
-          .set({ displayName: user.name });
+          .doc(u.user.uid)
+          .set({ displayName: user.displayName });
       })
       .then(() => {
         dispatch({ type: constants.SIGN_UP_SUCCESS });

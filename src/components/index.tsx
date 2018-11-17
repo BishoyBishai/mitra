@@ -5,7 +5,7 @@ import ProductsList from "./products/products-container";
 import Product from "./products/product";
 import { Segment } from "semantic-ui-react";
 import Login from "./auth/Login/login-container";
-import SignUp from "./auth/signup";
+import SignUp from "./auth/signup/singup-container";
 import { Switch, Route } from "react-router";
 import { PATHS } from "../router/routes";
 import { PrivateRoute, LoginRoute } from "./common/authRoute";

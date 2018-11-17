@@ -39,9 +39,13 @@ const NavBar = props => {
       )}
       {authState ? (
         <Menu.Menu position="right">
-          <Menu.Item position="right">
-            <a onClick={props.signOut}>Log out</a>
-          </Menu.Item>
+          <Dropdown item text={props.displayName}>
+            <Dropdown.Menu>
+              <Dropdown.Item>
+                <a onClick={props.signOut}>Log out</a>
+              </Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </Menu.Menu>
       ) : (
         <Menu.Menu position="right">
