@@ -20,6 +20,7 @@ class ProductsList extends React.Component<IProductsProps> {
       activePage,
       paginate,
       totalPages,
+      isPaginatedPage,
     } = this.props;
     return (
       <div className="products-list">
@@ -42,13 +43,15 @@ class ProductsList extends React.Component<IProductsProps> {
                 <ProductCard product={product} key={product.id} />
               ))}
             </Card.Group>
-            <Segment basic textAlign="center">
-              <ProductsPagination
-                activePage={activePage}
-                paginate={paginate}
-                totalPages={totalPages}
-              />
-            </Segment>
+            {isPaginatedPage && (
+              <Segment basic textAlign="center">
+                <ProductsPagination
+                  activePage={activePage}
+                  paginate={paginate}
+                  totalPages={totalPages}
+                />
+              </Segment>
+            )}
           </Grid.Column>
         </Grid>
       </div>

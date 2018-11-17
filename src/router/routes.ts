@@ -5,4 +5,5 @@ export const PATHS = {
   PRODUCTS: `/products`,
   CREATE_PRODUCT: `/products/new`,
   PRODUCT: (pid=':pid') => `/products/${pid}`,
+  EDIT_PRODUCT: (pid=':pid') => `/products/${pid}/edit`,
 };

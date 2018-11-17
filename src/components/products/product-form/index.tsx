@@ -10,20 +10,30 @@ import {
 } from "semantic-ui-react";
 import "./style.scss";
 import config from "../../../config/config";
-import { IProductFrom } from "../product-modal";
+import { IProductFrom, IFormTypeEnum } from "../product-modal";
+import PageLoader from "../../layout/loader/loader";
 class ProductForm extends React.Component<IProductFrom> {
-  constructor(props) {
-    super(props);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleDismiss = this.handleDismiss.bind(this);
-  }
+  productLoaded = false;
   state = {
     title: "",
     description: "",
     price: "",
     image: "",
   };
+
+  constructor(props) {
+    super(props);
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleDismiss = this.handleDismiss.bind(this);
+  }
+  componentDidUpdate() {
+    const { product, formType } = this.props;
+    if (formType === IFormTypeEnum.UPDATE && product && !this.productLoaded) {
+      this.setState({ ...product });
+      this.productLoaded = true;
+    }
+  }
 
   handleChange(e) {
     this.setState({ [e.target.name]: e.target.value });
@@ -33,16 +43,25 @@ class ProductForm extends React.Component<IProductFrom> {
   }
   handleSubmit(e) {
     e.preventDefault();
-    this.props.create(this.state);
+    this.props.formType === IFormTypeEnum.CREATE
+      ? this.props.create(this.state)
+      : this.props.update(this.state);
   }
   render() {
-    const { message, error } = this.props;
-    return (
+    const { message, error, formType, product } = this.props;
+    return (formType === IFormTypeEnum.UPDATE && product) ||
+      formType === IFormTypeEnum.CREATE ? (
       <div>
         <Header as="h2" textAlign="left">
-          <Header.Content>Add New Product</Header.Content>
+          <Header.Content>
+            {formType === IFormTypeEnum.CREATE
+              ? "Add New Product"
+              : "Update Your Product"}
+          </Header.Content>
           <Header.Subheader>
-            Add New product to your product list
+            {formType === IFormTypeEnum.CREATE
+              ? " Add New product to your product list"
+              : " Update your product list"}
           </Header.Subheader>
         </Header>
         {message && (
@@ -110,13 +129,17 @@ class ProductForm extends React.Component<IProductFrom> {
                   floated="right"
                 >
                   <Icon name="add" />
-                  Add Product
+                  {formType === IFormTypeEnum.CREATE
+                    ? "Add Product"
+                    : "Update Product"}
                 </Button>
               </Item.Extra>
             </Item.Content>
           </Item>
         </Item.Group>
       </div>
+    ) : (
+      <PageLoader />
     );
   }
 }

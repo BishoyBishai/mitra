@@ -30,3 +30,9 @@ export const paginate = page => {
     dispatch(getReduxAction(constants.CHANGE_ACTIVE_PAGE, page));
   };
 };
+
+export const edit = uid => {
+  return dispatch => {
+    dispatch(push({ pathname: PATHS.EDIT_PRODUCT(uid) }));
+  };
+};

@@ -16,13 +16,14 @@ const initState: IProductState = {
 
 const productReducer = (state = initState, action): IProductState => {
   switch (action.type) {
-    case constants.ADD_PRODUCT_SUCCESS:
+    case constants.PRODUCT_ACTION_SUCCESS:
       return {
         ...state,
         productError: null,
-        productsState: " Product has been added successfully",
+        productsState: action.payload,
       };
-    case constants.ADD_PRODUCT_SUCCESS:
+
+    case constants.PRODUCT_FAILED:
       return {
         ...state,
         productError: action.payload.err,

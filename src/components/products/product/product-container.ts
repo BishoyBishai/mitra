@@ -1,21 +1,29 @@
+import { remove } from "./../product-actions/product-crud";
 import { IStore } from "./../../../bin/store-modal";
 import { connect } from "react-redux";
 import { compose } from "redux";
 import { firestoreConnect } from "react-redux-firebase";
 import config from "./../../../config/config";
-import * as _ from "lodash";
 import Product from "./product";
+import { getProductById } from "../helpers";
+import { edit } from "../product-actions/product-layout";
 
 const mapStateToProps = (store: IStore, props) => {
-  const id = _.get(props, "match.params.pid");
-  const products= _.get(store, `firestore.data.products`);
-  const product=products&&products[id]
+  const product = getProductById(store, props);
   return {
     product: product,
   };
 };
 
+const mapDispatchToProps = dispatch => ({
+  edit: pid => dispatch(edit(pid)),
+  remove: pid => dispatch(remove(pid)),
+});
+
 export default compose<any>(
-  connect(mapStateToProps),
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+  ),
   firestoreConnect([{ collection: config.collections.products }]),
 )(Product);

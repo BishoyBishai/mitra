@@ -42,8 +42,11 @@ export interface IProductsProps {
 export interface IProductFrom {
   create;
   dismiss;
+  update;
   message: string;
   error: string;
+  product?: IProduct;
+  formType: IFormTypeEnum;
 }
 
 export interface IProductsFilters {
@@ -53,4 +56,9 @@ export interface IProductsFilters {
   changeFilterBy;
   toggleOnlyMe;
   changeSortedBy;
+}
+
+export enum IFormTypeEnum {
+  CREATE = "CREATE",
+  UPDATE = "UPDATE",
 }

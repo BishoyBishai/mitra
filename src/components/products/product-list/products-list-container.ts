@@ -36,9 +36,9 @@ const mapDispatchToProps = dispatch => ({
   paginate: p => dispatch(paginate(p)),
 });
 export default compose<any>(
+  firestoreConnect([{ collection: config.collections.products }]),
   connect(
     mapStateToProps,
     mapDispatchToProps,
   ),
-  firestoreConnect([{ collection: config.collections.products }]),
 )(ProductsList);
