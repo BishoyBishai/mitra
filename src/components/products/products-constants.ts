@@ -1,0 +1,6 @@
+const constants = {
+  ADD_PRODUCT_SUCCESS: "ADD_PRODUCT_SUCCESS",
+  PRODUCT_FAILED: "PRODUCT_FAILED",
+  DISMISS_MESSAGE: "DISMISS_MESSAGE",
+};
+export default constants;

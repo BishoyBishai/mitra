@@ -1,0 +1,16 @@
+.product-form {
+    .input {
+        width: 260px;
+        margin: 5px 0;
+        display: flex;
+    }
+
+    textarea {
+        width: 50%;
+        border: 1px solid rgba(34, 36, 38, .15);
+    }
+
+    .image img {
+        max-height: 150px;
+    }
+}

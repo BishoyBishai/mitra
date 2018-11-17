@@ -11,6 +11,7 @@ import { PATHS } from "../router/routes";
 import { PrivateRoute, LoginRoute } from "./common/authRoute";
 import { connect } from "react-redux";
 import { IStore } from "../bin/store-modal";
+import ProductForm from "./products/product-form/product-form-container";
 class App extends React.Component<{ firebase }> {
   render() {
     const { firebase } = this.props;
@@ -46,6 +47,12 @@ class App extends React.Component<{ firebase }> {
               exact
               path={PATHS.MY_PRODUCTS}
               component={ProductsList}
+            />
+            <PrivateRoute
+              firebase={firebase}
+              exact
+              path={PATHS.CREATE_PRODUCT}
+              component={ProductForm}
             />
             <PrivateRoute
               firebase={firebase}

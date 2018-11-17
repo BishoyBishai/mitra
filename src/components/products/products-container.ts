@@ -2,15 +2,16 @@ import { IStore } from "../../bin/store-modal";
 import { connect } from "react-redux";
 import ProductsList from "./Products-List";
 
-const stateMapToProps = (store: IStore) => {
+const mapStateToProps = (store: IStore) => {
   return {
     products: store.products.products,
+    message: store.products.productsState,
+    error: store.products.productError,
   };
 };
 
-const stateDispatchToProps = dispatch => {};
 
 export default connect(
-  stateMapToProps,
+  mapStateToProps,
   null,
 )(ProductsList);
