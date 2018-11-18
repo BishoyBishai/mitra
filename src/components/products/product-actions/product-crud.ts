@@ -4,7 +4,9 @@ import config from "../../../config/config";
 import { push } from "react-router-redux";
 import { PATHS } from "../../../router/routes";
 import { getReduxAction } from "../../../helper/redux";
-
+const get = fs => {
+  fs.get({ collection: config.collections.products });
+};
 export function create(product) {
   return (dispatch, getState, { getFirestore }) => {
     const fs = getFirestore();
@@ -16,6 +18,7 @@ export function create(product) {
         uid,
       })
       .then(() => {
+        get(fs);
         dispatch(
           getReduxAction(
             constants.PRODUCT_ACTION_SUCCESS,
@@ -49,6 +52,7 @@ export function update(product) {
           image: product.image,
         })
         .then(() => {
+          get(fs);
           dispatch(
             getReduxAction(
               constants.PRODUCT_ACTION_SUCCESS,
@@ -84,6 +88,7 @@ export function remove(product) {
         .doc(product.id)
         .delete()
         .then(() => {
+          get(fs);
           dispatch(
             getReduxAction(
               constants.PRODUCT_ACTION_SUCCESS,

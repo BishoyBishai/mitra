@@ -26,7 +26,8 @@ const authReducer = (state: IAuthState = authInitState, action): IAuthState => {
         authError: action.payload,
       };
   }
-  return state;
+
+  return { ...state, authError: null };
 };
 
 export default authReducer;

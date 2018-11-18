@@ -74,7 +74,7 @@ const productReducer = (state = initState, action): IProductState => {
       };
     }
   }
-  return state;
+  return { ...state, productError: null };
 };
 
 export default productReducer;
