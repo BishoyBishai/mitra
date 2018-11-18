@@ -3,10 +3,11 @@ import { Menu, Dropdown } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import { PATHS } from "../../../router/routes";
 import { isAuthenticated } from "../../../helper/auth";
+import "./style.scss";
 const NavBar = props => {
   const authState = isAuthenticated(props.authState);
   return (
-    <Menu stackable>
+    <Menu stackable className="nav-bar">
       <Menu.Item>
         <img src="./src/assets/img/logo/logo.png" />
         <NavLink exact activeClassName="active" to={PATHS.INDEX}>

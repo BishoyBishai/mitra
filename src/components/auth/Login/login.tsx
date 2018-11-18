@@ -8,7 +8,6 @@ import {
   Button,
 } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
-
 import "../style.scss";
 import { PATHS } from "../../../router/routes";
 import { ILoginProps } from "../auth-modals";
@@ -71,7 +70,7 @@ class Login extends React.Component<ILoginProps> {
               <Header.Content>Log-in to your account</Header.Content>
             </Header>
             <Form className="ui large form">
-              <Segment stacked secondary>
+              <Segment stacked>
                 <Form.Input
                   icon="user"
                   iconPosition="left"
@@ -116,7 +115,7 @@ class Login extends React.Component<ILoginProps> {
               </Segment>
             </Form>
 
-            <Message>
+            <Message className="sign-up-message">
               New to us? <NavLink to={PATHS.SIGN_UP}>Sign up</NavLink>
             </Message>
           </Grid.Column>

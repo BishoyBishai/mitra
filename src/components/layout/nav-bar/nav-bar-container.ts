@@ -9,7 +9,7 @@ const mapDispatchToProps = dispatch => ({
 
 const mapStateToProps = (state: IStore) => ({
   authState: state.firebase && state.firebase.auth,
-  displayName: _.get(state, "firebase.profile.displayName", ""),
+  displayName: _.get(state, "firebase.profile.displayName", ""), 
 });
 
 export default connect(

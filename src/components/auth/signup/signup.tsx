@@ -8,8 +8,7 @@ import {
   Button,
 } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
-
-import ".././style.scss";
+import "./../style.scss";
 import { PATHS } from "../../../router/routes";
 import { checkField, IConditionKey } from "../../../helper/form";
 class SignUp extends React.Component<{ signup; authError }> {
@@ -84,7 +83,7 @@ class SignUp extends React.Component<{ signup; authError }> {
               <Header.Content>Create new account</Header.Content>
             </Header>
             <Form action="" method="get" className="ui large form">
-              <Segment textAlign="left" stacked secondary>
+              <Segment textAlign="left" stacked >
                 <Form.Input
                   icon="user"
                   label="Your Name:"
@@ -141,7 +140,7 @@ class SignUp extends React.Component<{ signup; authError }> {
                 ))}
               </Message>
             )}
-            <Message>
+            <Message className="sign-up-message">
               Have account? <NavLink to={PATHS.LOGIN}>Login</NavLink>
             </Message>
           </Grid.Column>

@@ -6,7 +6,26 @@ body>.grid {
 	.image {
 		margin-top: -100px;
 	}
+
 	.column {
 		max-width: 450px;
+	}
+
+	.header .content {
+		color: $main_color;
+		font-size: 20px
+	}
+
+	.segment,
+	.sign-up-message {
+		background: $white;
+		border: 1px solid $main-color;
+		box-shadow: none;
+	}
+
+	.sign-up-message a {
+		color: $main_color;
+		font-weight: 600;
+
 	}
 }

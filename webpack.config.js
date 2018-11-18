@@ -1,11 +1,14 @@
 const webpack = require("webpack");
-const { TsConfigPathsPlugin } = require("awesome-typescript-loader");
+const {
+    TsConfigPathsPlugin
+} = require("awesome-typescript-loader");
 const path = require("path");
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
     entry: {
-        bundle: ["core-js", path.join(__dirname, "/src/app")]
+        bundle: ["core-js", path.join(__dirname, "/src/app")],
     },
 
     output: {
@@ -24,7 +27,17 @@ module.exports = {
             },
             {
                 test: /\.scss?$/,
-                loader: "style-loader!css-loader!sass-loader"
+                use: [process.env.NODE_ENV === 'production' ? {
+                    loader: MiniCssExtractPlugin.loader,
+                    options: {
+                        publicPath: './'
+                    }
+                } : "style-loader", "css-loader", "sass-loader", {
+                    loader: 'sass-resources-loader',
+                    options: {
+                        resources: [path.join(__dirname, "/src/assets/scss/colors.scss")]
+                    },
+                }]
             },
             {
                 test: /\.css?$/,
@@ -55,10 +68,17 @@ module.exports = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'src/index.html'}),
+            template: 'src/index.html'
+        }),
         new webpack.HotModuleReplacementPlugin(),
-        new TsConfigPathsPlugin()
+        new TsConfigPathsPlugin(),
+        new MiniCssExtractPlugin({
+            // Options similar to the same options in webpackOptions.output
+            // both options are optional
+            filename: "[name].css",
+            chunkFilename: "[id].css"
+        })
     ],
     watch: true,
-    mode:'development'
+    mode: 'development'
 };
