@@ -2,12 +2,11 @@ import * as React from "react";
 import { Menu, Dropdown, Input, Checkbox } from "semantic-ui-react";
 import { NavLink } from "react-router-dom";
 import { PATHS } from "./../../../router/routes";
-import { IProductsFilters, ISortedByEnum } from "../product-modal";
+import { IProductsFilters } from "../product-modal";
 import { getSortedByOption } from "./helper";
-
+import "./style.scss";
 const ProductsFilter = (props: IProductsFilters) => {
   const {
-    sortedBy,
     filterBy,
     onlyMe,
     changeFilterBy,
@@ -15,7 +14,7 @@ const ProductsFilter = (props: IProductsFilters) => {
     changeSortedBy,
   } = props;
   return (
-    <Menu vertical fluid>
+    <Menu vertical fluid className="filters-section">
       <Menu.Item>
         <Input
           onChange={e => changeFilterBy(e.target.value)}
