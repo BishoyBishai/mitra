@@ -1,0 +1,7 @@
+.ui.positive.button {
+    background: $main-color;
+
+    &:hover,&:focus,&:active {
+        background: $second-color;
+    }
+}
