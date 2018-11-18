@@ -1,0 +1,31 @@
+.filters-section {
+
+    a,
+    .checkbox {
+        color: $main-color;
+        font-weight: bold;
+    }
+
+    .checkbox label {
+        &:before {
+            border: 1px solid $main-color;
+        }
+    }
+
+    .ui.checkbox input:checked~label:after {
+        color: $white;
+        background: $main-color;
+        border: none;
+    }
+
+    .ui.selection.dropdown{
+        border: none;
+        border-top: 1px solid #ddd;
+        border-radius: 0;
+
+        .icon {
+            border: none;
+        }
+    }
+
+}

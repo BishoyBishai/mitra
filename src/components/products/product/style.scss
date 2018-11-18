@@ -1,5 +1,21 @@
-.product-card {
-    .item .image img {
-        max-height: 250px;
+.product-details {
+    &.ui.card {
+        border: none;
+        box-shadow: none;
+        .header {
+            font-size: 27px;
+            font-weight: 700;
+            color: $main-color;
+            text-align: center;
+            padding: 1em;
+            text-transform: capitalize;
+        }
+        .meta,.description{
+            text-align: center;
+            font-weight: 600;
+        }
+        .description{
+            padding: 1em;
+        }
     }
 }

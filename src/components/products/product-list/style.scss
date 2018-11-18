@@ -1,0 +1,26 @@
+.product-card {
+    &.ui.card {
+        border: 1px solid $main-color;
+        box-shadow: none;
+
+        .content {
+            .header {
+                color: $main-color;
+                text-transform: capitalize;
+            }
+            img{
+                min-width: 100px;
+                max-height: 100px
+            }
+        }
+
+        .extra.content>a {
+            color: $main-color;
+            font-weight: 600;
+
+            &:hover {
+                color: $second-color;
+            }
+        }
+    }
+}
