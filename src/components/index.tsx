@@ -12,13 +12,15 @@ import { PrivateRoute, LoginRoute, AuthorizedRoute } from "./common/authRoute";
 import { connect } from "react-redux";
 import { IStore } from "../bin/store-modal";
 import ProductForm from "./products/product-form/product-form-container";
+import Footer from "./layout/footer/loader";
+import "./style.scss";
 class App extends React.Component<{ firebase; firestore }> {
   render() {
     const { firebase, firestore } = this.props;
     return (
       <div>
         <NavBar />
-        <Segment basic>
+        <Segment className="app-body" basic>
           <Switch>
             <PrivateRoute
               firebase={firebase}
@@ -61,6 +63,7 @@ class App extends React.Component<{ firebase; firestore }> {
             />
           </Switch>
         </Segment>
+        <Footer />
       </div>
     );
   }
