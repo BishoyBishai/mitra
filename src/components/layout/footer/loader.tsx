@@ -17,6 +17,10 @@ const technologyStack = [
     name: "Firebase",
     repo: "https://github.com/firebase/",
   },
+  {
+    name: "Redux-Thunk",
+    repo: "https://github.com/reduxjs/redux-thunk",
+  },
 ];
 const Footer = () => (
   <Segment inverted className="footer">

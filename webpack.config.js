@@ -12,7 +12,7 @@ module.exports = {
     },
 
     output: {
-        path: path.join(__dirname, "/search-project"),
+        path: path.join(__dirname, "/mitra"),
         filename: "bundle.js",
         publicPath: "/"
     },
@@ -73,8 +73,6 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin(),
         new TsConfigPathsPlugin(),
         new MiniCssExtractPlugin({
-            // Options similar to the same options in webpackOptions.output
-            // both options are optional
             filename: "[name].css",
             chunkFilename: "[id].css"
         })
