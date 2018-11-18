@@ -1,5 +1,6 @@
 export interface IAuthState {
   authError: any;
+  uid:string;
 }
 
 export interface ICredentials {

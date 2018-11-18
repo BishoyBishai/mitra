@@ -10,7 +10,7 @@ export function signIn(credentials) {
     fb.auth()
       .signInWithEmailAndPassword(credentials.email, credentials.password)
       .then(key => {
-        dispatch(getReduxAction(constants.LOGIN_SUCCESS));
+        dispatch(getReduxAction(constants.LOGIN_SUCCESS, key.user.uid));
         dispatch(push(PATHS.INDEX));
       })
       .catch(err => {
@@ -25,12 +25,13 @@ export function signUp(user: IUSer) {
     fb.auth()
       .createUserWithEmailAndPassword(user.email, user.password)
       .then(u => {
+        dispatch(getReduxAction(constants.LOGIN_SUCCESS, u.user.uid));
         return fs
           .collection("users")
           .doc(u.user.uid)
           .set({ displayName: user.displayName });
       })
-      .then(() => {
+      .then(u => {
         dispatch(getReduxAction(constants.SIGN_UP_SUCCESS));
       })
       .catch(err => {

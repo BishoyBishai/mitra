@@ -12,6 +12,7 @@ const mapStateToProps = (store: IStore, props) => {
   const product = getProductById(store, props);
   return {
     product: product,
+    currentUser: store.firebase.auth.uid,
   };
 };
 

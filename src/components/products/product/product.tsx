@@ -5,7 +5,12 @@ import PageLoader from "../../layout/loader/loader";
 import { geCalenderDate } from "../../../helper/date";
 import "./style.scss";
 import AppModal from "../../layout/modal";
-class Product extends React.Component<{ product: IProduct; edit; remove }> {
+class Product extends React.Component<{
+  product: IProduct;
+  edit;
+  remove;
+  currentUser;
+}> {
   constructor(props) {
     super(props);
     this.openDeleteModal = this.openDeleteModal.bind(this);
@@ -27,7 +32,7 @@ class Product extends React.Component<{ product: IProduct; edit; remove }> {
   }
 
   render() {
-    const { product } = this.props;
+    const { product, currentUser } = this.props;
     return (
       <div>
         {product ? (
@@ -46,28 +51,30 @@ class Product extends React.Component<{ product: IProduct; edit; remove }> {
                   <span className="cinema">{product.price} $</span>
                 </Item.Meta>
                 <Item.Description>{product.description}</Item.Description>
-                <Item.Extra>
-                  <Button
-                    onClick={() => this.props.edit(product.id)}
-                    icon
-                    labelPosition="left"
-                    positive
-                    floated="right"
-                  >
-                    <Icon name="edit" />
-                    Edit
-                  </Button>
-                  <Button
-                    onClick={this.openDeleteModal}
-                    icon
-                    labelPosition="right"
-                    negative
-                    floated="right"
-                  >
-                    <Icon name="delete" />
-                    Delete
-                  </Button>
-                </Item.Extra>
+                {currentUser === product.uid && (
+                  <Item.Extra>
+                    <Button
+                      onClick={() => this.props.edit(product.id)}
+                      icon
+                      labelPosition="left"
+                      positive
+                      floated="right"
+                    >
+                      <Icon name="edit" />
+                      Edit
+                    </Button>
+                    <Button
+                      onClick={this.openDeleteModal}
+                      icon
+                      labelPosition="right"
+                      negative
+                      floated="right"
+                    >
+                      <Icon name="delete" />
+                      Delete
+                    </Button>
+                  </Item.Extra>
+                )}
               </Item.Content>
             </Item>
           </Item.Group>

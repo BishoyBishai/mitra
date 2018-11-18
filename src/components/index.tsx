@@ -8,13 +8,13 @@ import Login from "./auth/Login/login-container";
 import SignUp from "./auth/signup/singup-container";
 import { Switch, Route } from "react-router";
 import { PATHS } from "../router/routes";
-import { PrivateRoute, LoginRoute } from "./common/authRoute";
+import { PrivateRoute, LoginRoute, AuthorizedRoute } from "./common/authRoute";
 import { connect } from "react-redux";
 import { IStore } from "../bin/store-modal";
 import ProductForm from "./products/product-form/product-form-container";
-class App extends React.Component<{ firebase }> {
+class App extends React.Component<{ firebase; firestore }> {
   render() {
-    const { firebase } = this.props;
+    const { firebase, firestore } = this.props;
     return (
       <div>
         <NavBar />
@@ -48,8 +48,9 @@ class App extends React.Component<{ firebase }> {
               path={PATHS.CREATE_PRODUCT}
               component={ProductForm}
             />
-            <PrivateRoute
+            <AuthorizedRoute
               firebase={firebase}
+              firestore={firestore}
               path={PATHS.EDIT_PRODUCT()}
               component={ProductForm}
             />
@@ -66,5 +67,6 @@ class App extends React.Component<{ firebase }> {
 }
 const mapStateToProps = (state: IStore) => ({
   firebase: state.firebase,
+  firestore: state.firestore,
 });
 export default connect(mapStateToProps)(App);
