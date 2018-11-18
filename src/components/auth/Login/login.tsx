@@ -12,6 +12,7 @@ import { NavLink } from "react-router-dom";
 import "../style.scss";
 import { PATHS } from "../../../router/routes";
 import { ILoginProps } from "../auth-modals";
+import { checkField, IConditionKey } from "../../../helper/form";
 
 class Login extends React.Component<ILoginProps> {
   constructor(props) {
@@ -34,6 +35,34 @@ class Login extends React.Component<ILoginProps> {
   }
   render() {
     const { email, password } = this.state;
+    const emailErrors = checkField(
+      [
+        {
+          type: IConditionKey.REQUIRED,
+          message: "Field Email is required",
+        },
+        {
+          type: IConditionKey.EMAIL,
+          message: "Field Email Address must have a valid form",
+        },
+      ],
+      email,
+    );
+    const passwordErrors = checkField(
+      [
+        {
+          type: IConditionKey.REQUIRED,
+          message: "Field Password is required",
+        },
+        {
+          type: IConditionKey.MIN_LENGTH,
+          message: "Field Password must be more than 6 characters",
+          value: 6,
+        },
+      ],
+      password,
+    );
+    const errors = [].concat(passwordErrors, emailErrors);
     return (
       <div className="login-page">
         <Grid className="ui middle aligned center aligned grid">
@@ -49,6 +78,7 @@ class Login extends React.Component<ILoginProps> {
                   type="text"
                   name="email"
                   value={email}
+                  error={emailErrors.length > 0}
                   onChange={this.handleChange}
                   placeholder="E-mail address"
                 />
@@ -57,16 +87,30 @@ class Login extends React.Component<ILoginProps> {
                   iconPosition="left"
                   type="password"
                   name="password"
+                  error={passwordErrors.length > 0}
                   value={password}
                   placeholder="Password"
                   onChange={this.handleChange}
                 />
-                <Button onClick={this.handleSubmit} positive fluid size="large">
+                <Button
+                  disabled={errors.length > 0}
+                  onClick={this.handleSubmit}
+                  positive
+                  fluid
+                  size="large"
+                >
                   Login
                 </Button>
                 {this.props.authError && (
                   <Message negative>
                     <Message.Header>Login Error</Message.Header>
+                  </Message>
+                )}
+                {errors.length > 0 && (
+                  <Message negative>
+                    {errors.map(err => (
+                      <Message.Content key={err}>{err}</Message.Content>
+                    ))}
                   </Message>
                 )}
               </Segment>

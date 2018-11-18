@@ -11,7 +11,8 @@ import { NavLink } from "react-router-dom";
 
 import ".././style.scss";
 import { PATHS } from "../../../router/routes";
-class SignUp extends React.Component<{ signup }> {
+import { checkField, IConditionKey } from "../../../helper/form";
+class SignUp extends React.Component<{ signup; authError }> {
   constructor(props) {
     super(props);
 
@@ -33,6 +34,48 @@ class SignUp extends React.Component<{ signup }> {
   }
   render() {
     const { email, password, displayName } = this.state;
+    const displayNameErrors = checkField(
+      [
+        {
+          type: IConditionKey.REQUIRED,
+          message: "Field DisplayName is required",
+        },
+        {
+          type: IConditionKey.MIN_LENGTH,
+          message: "Field DisplayName must be more than 4 characters",
+          value: 4,
+        },
+      ],
+      displayName,
+    );
+    const emailErrors = checkField(
+      [
+        {
+          type: IConditionKey.REQUIRED,
+          message: "Field Email is required",
+        },
+        {
+          type: IConditionKey.EMAIL,
+          message: "Field Email Address must have a valid form",
+        },
+      ],
+      email,
+    );
+    const passwordErrors = checkField(
+      [
+        {
+          type: IConditionKey.REQUIRED,
+          message: "Field Password is required",
+        },
+        {
+          type: IConditionKey.MIN_LENGTH,
+          message: "Field Password must be more than 6 characters",
+          value: 6,
+        },
+      ],
+      password,
+    );
+    const errors = [].concat(passwordErrors, emailErrors, displayNameErrors);
     return (
       <div className="login-page">
         <Grid className="ui middle aligned center aligned grid">
@@ -47,7 +90,8 @@ class SignUp extends React.Component<{ signup }> {
                   label="Your Name:"
                   iconPosition="left"
                   type="text"
-                  vlaue={displayName}
+                  value={displayName}
+                  error={displayNameErrors.length > 0}
                   name="displayName"
                   onChange={this.handleChange}
                   placeholder="Full Name"
@@ -57,6 +101,7 @@ class SignUp extends React.Component<{ signup }> {
                   label="Your Email:"
                   iconPosition="left"
                   type="text"
+                  error={emailErrors.length > 0}
                   name="email"
                   value={email}
                   onChange={this.handleChange}
@@ -68,16 +113,34 @@ class SignUp extends React.Component<{ signup }> {
                   label="Your Password:"
                   type="password"
                   name="password"
+                  error={passwordErrors.length > 0}
                   value={password}
                   onChange={this.handleChange}
                   placeholder="Password"
                 />
-                <Button onClick={this.handleSubmit} positive fluid size="large">
+                <Button
+                  disabled={errors.length > 0}
+                  onClick={this.handleSubmit}
+                  positive
+                  fluid
+                  size="large"
+                >
                   Sign Up
                 </Button>
               </Segment>
             </Form>
-
+            {this.props.authError && (
+              <Message negative>
+                <Message.Header>Login Error</Message.Header>
+              </Message>
+            )}
+            {errors.length > 0 && (
+              <Message negative>
+                {errors.map(err => (
+                  <Message.Content key={err}>{err}</Message.Content>
+                ))}
+              </Message>
+            )}
             <Message>
               Have account? <NavLink to={PATHS.LOGIN}>Login</NavLink>
             </Message>

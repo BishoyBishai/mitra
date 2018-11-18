@@ -12,6 +12,7 @@ import "./style.scss";
 import config from "../../../config/config";
 import { IProductFrom, IFormTypeEnum } from "../product-modal";
 import PageLoader from "../../layout/loader/loader";
+import { checkField, IConditionKey } from "../../../helper/form";
 class ProductForm extends React.Component<IProductFrom> {
   productLoaded = false;
   state = {
@@ -49,6 +50,30 @@ class ProductForm extends React.Component<IProductFrom> {
   }
   render() {
     const { message, error, formType, product } = this.props;
+    const { title, price } = this.state;
+    const titleErrors = checkField(
+      [
+        {
+          type: IConditionKey.REQUIRED,
+          message: "Title is required",
+        },
+      ],
+      title,
+    );
+    const priceErrors = checkField(
+      [
+        {
+          type: IConditionKey.REQUIRED,
+          message: "Price is required",
+        },
+        {
+          type: IConditionKey.NUMBER,
+          message: "Price must to be number",
+        },
+      ],
+      price,
+    );
+    const formError = [].concat(titleErrors, priceErrors);
     return (formType === IFormTypeEnum.UPDATE && product) ||
       formType === IFormTypeEnum.CREATE ? (
       <div>
@@ -84,7 +109,8 @@ class ProductForm extends React.Component<IProductFrom> {
                   size="medium"
                   type="text"
                   name="title"
-                  value={this.state.title}
+                  error={titleErrors.length > 0}
+                  value={title}
                   onChange={this.handleChange}
                   placeholder="Product Name"
                 />
@@ -95,8 +121,9 @@ class ProductForm extends React.Component<IProductFrom> {
                   iconPosition="left"
                   size="medium"
                   type="text"
+                  error={priceErrors.length > 0}
                   name="price"
-                  value={this.state.price}
+                  value={price}
                   onChange={this.handleChange}
                   placeholder="Product Price"
                 />
@@ -124,6 +151,7 @@ class ProductForm extends React.Component<IProductFrom> {
                 <Button
                   onClick={this.handleSubmit}
                   icon
+                  disabled={formError.length > 0}
                   labelPosition="left"
                   positive
                   floated="right"
@@ -137,6 +165,13 @@ class ProductForm extends React.Component<IProductFrom> {
             </Item.Content>
           </Item>
         </Item.Group>
+        {formError.length > 0 && (
+          <Message negative>
+            {formError.map(err => (
+              <Message.Content key={err}>{err}</Message.Content>
+            ))}
+          </Message>
+        )}
       </div>
     ) : (
       <PageLoader />
