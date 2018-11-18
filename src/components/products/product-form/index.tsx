@@ -76,7 +76,7 @@ class ProductForm extends React.Component<IProductFrom> {
     const formError = [].concat(titleErrors, priceErrors);
     return (formType === IFormTypeEnum.UPDATE && product) ||
       formType === IFormTypeEnum.CREATE ? (
-      <div>
+      <div className="product-form">
         <Header as="h2" textAlign="left">
           <Header.Content>
             {formType === IFormTypeEnum.CREATE
@@ -98,7 +98,7 @@ class ProductForm extends React.Component<IProductFrom> {
             <Message.Header>{message}</Message.Header>
           </Message>
         )}
-        <Item.Group className="product-form">
+        <Item.Group >
           <Item>
             <Item.Image src={this.state.image || config.defaultImagePath} />
             <Item.Content>

@@ -13,4 +13,13 @@
     .image img {
         max-height: 150px;
     }
+
+    .header {
+
+        .content,
+        .sub.header {
+
+            color: $main-color;
+        }
+    }
 }
