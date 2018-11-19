@@ -13,6 +13,7 @@ import { PATHS } from "../../../router/routes";
 import { ILoginProps } from "../auth-modals";
 import { checkField } from "../../../helper/form";
 import { validations } from "../utils";
+import ValidateField from "../../common/validate-field/validateField";
 
 class Login extends React.Component<ILoginProps> {
   constructor(props) {
@@ -35,9 +36,7 @@ class Login extends React.Component<ILoginProps> {
   }
   render() {
     const { email, password } = this.state;
-    const emailErrors = checkField(validations.email, email);
-    const passwordErrors = checkField(validations.password, password);
-    const errors = [].concat(passwordErrors, emailErrors);
+
     return (
       <div className="login-page">
         <Grid className="ui middle aligned center aligned grid">
@@ -47,28 +46,25 @@ class Login extends React.Component<ILoginProps> {
             </Header>
             <Form className="ui large form">
               <Segment stacked>
-                <Form.Input
+                <ValidateField
                   icon="user"
-                  iconPosition="left"
                   type="text"
                   name="email"
                   value={email}
-                  error={emailErrors.length > 0}
+                  validate={validations.email}
                   onChange={this.handleChange}
                   placeholder="E-mail address"
                 />
-                <Form.Input
+                <ValidateField
                   icon="lock"
-                  iconPosition="left"
                   type="password"
                   name="password"
-                  error={passwordErrors.length > 0}
+                  validate={validations.password}
                   value={password}
                   placeholder="Password"
                   onChange={this.handleChange}
                 />
                 <Button
-                  disabled={errors.length > 0}
                   onClick={this.handleSubmit}
                   positive
                   fluid
@@ -79,13 +75,6 @@ class Login extends React.Component<ILoginProps> {
                 {this.props.authError && (
                   <Message negative>
                     <Message.Header>Login Error</Message.Header>
-                  </Message>
-                )}
-                {errors.length > 0 && (
-                  <Message negative>
-                    {errors.map(err => (
-                      <Message.Content key={err}>{err}</Message.Content>
-                    ))}
                   </Message>
                 )}
               </Segment>

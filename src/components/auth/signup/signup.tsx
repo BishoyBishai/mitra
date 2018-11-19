@@ -10,8 +10,8 @@ import {
 import { NavLink } from "react-router-dom";
 import "./../style.scss";
 import { PATHS } from "../../../router/routes";
-import { checkField } from "../../../helper/form";
 import { validations } from "../utils";
+import ValidateField from "../../common/validate-field/validateField";
 class SignUp extends React.Component<{ signup; authError }> {
   constructor(props) {
     super(props);
@@ -33,10 +33,6 @@ class SignUp extends React.Component<{ signup; authError }> {
   }
   render() {
     const { email, password, displayName } = this.state;
-    const displayNameErrors = checkField(validations.displayName, displayName);
-    const emailErrors = checkField(validations.email, email);
-    const passwordErrors = checkField(validations.password, password);
-    const errors = [].concat(passwordErrors, emailErrors, displayNameErrors);
     return (
       <div className="login-page">
         <Grid className="ui middle aligned center aligned grid">
@@ -46,46 +42,37 @@ class SignUp extends React.Component<{ signup; authError }> {
             </Header>
             <Form action="" method="get" className="ui large form">
               <Segment textAlign="left" stacked>
-                <Form.Input
+                <ValidateField
                   icon="user"
+                  validate={validations.displayName}
                   label="Your Name:"
-                  iconPosition="left"
                   type="text"
                   value={displayName}
-                  error={displayNameErrors.length > 0}
                   name="displayName"
                   onChange={this.handleChange}
                   placeholder="Full Name"
                 />
-                <Form.Input
+                <ValidateField
                   icon="user"
                   label="Your Email:"
-                  iconPosition="left"
                   type="text"
-                  error={emailErrors.length > 0}
+                  validate={validations.email}
                   name="email"
                   value={email}
                   onChange={this.handleChange}
                   placeholder="E-mail address"
                 />
-                <Form.Input
+                <ValidateField
                   icon="lock"
-                  iconPosition="left"
+                  validate={validations.password}
                   label="Your Password:"
                   type="password"
                   name="password"
-                  error={passwordErrors.length > 0}
                   value={password}
                   onChange={this.handleChange}
                   placeholder="Password"
                 />
-                <Button
-                  disabled={errors.length > 0}
-                  onClick={this.handleSubmit}
-                  positive
-                  fluid
-                  size="large"
-                >
+                <Button onClick={this.handleSubmit} positive fluid size="large">
                   Sign Up
                 </Button>
               </Segment>
@@ -93,13 +80,6 @@ class SignUp extends React.Component<{ signup; authError }> {
             {this.props.authError && (
               <Message negative>
                 <Message.Header>Login Error</Message.Header>
-              </Message>
-            )}
-            {errors.length > 0 && (
-              <Message negative>
-                {errors.map(err => (
-                  <Message.Content key={err}>{err}</Message.Content>
-                ))}
               </Message>
             )}
             <Message className="sign-up-message">

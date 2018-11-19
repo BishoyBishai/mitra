@@ -12,8 +12,8 @@ import "./style.scss";
 import config from "../../../config/config";
 import { IProductFrom, IFormTypeEnum } from "../product-modal";
 import PageLoader from "../../layout/loader/loader";
-import { checkField } from "../../../helper/form";
 import { validations } from "../utils";
+import ValidateField from "../../common/validate-field/validateField";
 class ProductForm extends React.Component<IProductFrom> {
   productLoaded = false;
   state = {
@@ -52,12 +52,6 @@ class ProductForm extends React.Component<IProductFrom> {
   render() {
     const { message, error, formType, product } = this.props;
     const { title, price } = this.state;
-    const titleErrors = checkField(validations.title, title);
-    const priceErrors = checkField(
-      validations.price,
-      price,
-    );
-    const formError = [].concat(titleErrors, priceErrors);
     return (formType === IFormTypeEnum.UPDATE && product) ||
       formType === IFormTypeEnum.CREATE ? (
       <div className="product-form">
@@ -87,26 +81,24 @@ class ProductForm extends React.Component<IProductFrom> {
             <Item.Image src={this.state.image || config.defaultImagePath} />
             <Item.Content>
               <Item.Header as="a">
-                <Input
+                <ValidateField
                   icon="pencil alternate"
-                  iconPosition="left"
                   size="medium"
                   type="text"
                   name="title"
-                  error={titleErrors.length > 0}
                   value={title}
+                  validate={validations.title}
                   onChange={this.handleChange}
                   placeholder="Product Name"
                 />
               </Item.Header>
               <Item.Meta>
-                <Input
+                <ValidateField
                   icon="money"
-                  iconPosition="left"
                   size="medium"
                   type="text"
-                  error={priceErrors.length > 0}
                   name="price"
+                  validate={validations.price}
                   value={price}
                   onChange={this.handleChange}
                   placeholder="Product Price"
@@ -135,7 +127,6 @@ class ProductForm extends React.Component<IProductFrom> {
                 <Button
                   onClick={this.handleSubmit}
                   icon
-                  disabled={formError.length > 0}
                   labelPosition="left"
                   positive
                   floated="right"
@@ -149,13 +140,6 @@ class ProductForm extends React.Component<IProductFrom> {
             </Item.Content>
           </Item>
         </Item.Group>
-        {formError.length > 0 && (
-          <Message negative>
-            {formError.map(err => (
-              <Message.Content key={err}>{err}</Message.Content>
-            ))}
-          </Message>
-        )}
       </div>
     ) : (
       <PageLoader />
