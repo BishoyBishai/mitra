@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Button, Icon, Item, Card, Image } from "semantic-ui-react";
+import { Button, Icon, Card, Image } from "semantic-ui-react";
 import { IProduct } from "../product-modal";
 import PageLoader from "../../layout/loader/loader";
 import { geCalenderDate } from "../../../helper/date";

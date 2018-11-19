@@ -22,7 +22,7 @@ export const filterProduct = (
     : filetedProduct.sort((p1, p2) => {
         let sort: number;
         if (sortedBy === ISortedByEnum.DATE) {
-          sort = compareToDates(p1.date_created, p2.date_created);
+          sort = compareToDates(p2.date_created, p1.date_created);
         } else if (sortedBy === ISortedByEnum.PRICE) {
           sort = p1.price - p2.price;
         } else sort = p1.title > p2.title ? 1 : -1;

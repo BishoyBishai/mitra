@@ -4,7 +4,7 @@ export interface IProduct {
   description: string;
   price: number;
   image: string;
-  date_created: string;
+  date_created;
   uid: string;
 }
 export enum ISortedByEnum {

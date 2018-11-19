@@ -7,5 +7,5 @@ export const geCalenderDate = date => {
 };
 
 export const compareToDates = (d1, d2) => {
-  return toDate(d1).diff(toDate(d2));
+  return toDate(d2).diff(toDate(d1));
 };
