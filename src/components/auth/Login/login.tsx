@@ -11,7 +11,8 @@ import { NavLink } from "react-router-dom";
 import "../style.scss";
 import { PATHS } from "../../../router/routes";
 import { ILoginProps } from "../auth-modals";
-import { checkField, IConditionKey } from "../../../helper/form";
+import { checkField } from "../../../helper/form";
+import { validations } from "../utils";
 
 class Login extends React.Component<ILoginProps> {
   constructor(props) {
@@ -34,33 +35,8 @@ class Login extends React.Component<ILoginProps> {
   }
   render() {
     const { email, password } = this.state;
-    const emailErrors = checkField(
-      [
-        {
-          type: IConditionKey.REQUIRED,
-          message: "Field Email is required",
-        },
-        {
-          type: IConditionKey.EMAIL,
-          message: "Field Email Address must have a valid form",
-        },
-      ],
-      email,
-    );
-    const passwordErrors = checkField(
-      [
-        {
-          type: IConditionKey.REQUIRED,
-          message: "Field Password is required",
-        },
-        {
-          type: IConditionKey.MIN_LENGTH,
-          message: "Field Password must be more than 6 characters",
-          value: 6,
-        },
-      ],
-      password,
-    );
+    const emailErrors = checkField(validations.email, email);
+    const passwordErrors = checkField(validations.password, password);
     const errors = [].concat(passwordErrors, emailErrors);
     return (
       <div className="login-page">

@@ -12,7 +12,8 @@ import "./style.scss";
 import config from "../../../config/config";
 import { IProductFrom, IFormTypeEnum } from "../product-modal";
 import PageLoader from "../../layout/loader/loader";
-import { checkField, IConditionKey } from "../../../helper/form";
+import { checkField } from "../../../helper/form";
+import { validations } from "../utils";
 class ProductForm extends React.Component<IProductFrom> {
   productLoaded = false;
   state = {
@@ -51,26 +52,9 @@ class ProductForm extends React.Component<IProductFrom> {
   render() {
     const { message, error, formType, product } = this.props;
     const { title, price } = this.state;
-    const titleErrors = checkField(
-      [
-        {
-          type: IConditionKey.REQUIRED,
-          message: "Title is required",
-        },
-      ],
-      title,
-    );
+    const titleErrors = checkField(validations.title, title);
     const priceErrors = checkField(
-      [
-        {
-          type: IConditionKey.REQUIRED,
-          message: "Price is required",
-        },
-        {
-          type: IConditionKey.NUMBER,
-          message: "Price must to be number",
-        },
-      ],
+      validations.price,
       price,
     );
     const formError = [].concat(titleErrors, priceErrors);
@@ -98,7 +82,7 @@ class ProductForm extends React.Component<IProductFrom> {
             <Message.Header>{message}</Message.Header>
           </Message>
         )}
-        <Item.Group >
+        <Item.Group>
           <Item>
             <Item.Image src={this.state.image || config.defaultImagePath} />
             <Item.Content>

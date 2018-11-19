@@ -10,11 +10,11 @@ import {
 import { NavLink } from "react-router-dom";
 import "./../style.scss";
 import { PATHS } from "../../../router/routes";
-import { checkField, IConditionKey } from "../../../helper/form";
+import { checkField } from "../../../helper/form";
+import { validations } from "../utils";
 class SignUp extends React.Component<{ signup; authError }> {
   constructor(props) {
     super(props);
-
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -33,47 +33,9 @@ class SignUp extends React.Component<{ signup; authError }> {
   }
   render() {
     const { email, password, displayName } = this.state;
-    const displayNameErrors = checkField(
-      [
-        {
-          type: IConditionKey.REQUIRED,
-          message: "Field DisplayName is required",
-        },
-        {
-          type: IConditionKey.MIN_LENGTH,
-          message: "Field DisplayName must be more than 4 characters",
-          value: 4,
-        },
-      ],
-      displayName,
-    );
-    const emailErrors = checkField(
-      [
-        {
-          type: IConditionKey.REQUIRED,
-          message: "Field Email is required",
-        },
-        {
-          type: IConditionKey.EMAIL,
-          message: "Field Email Address must have a valid form",
-        },
-      ],
-      email,
-    );
-    const passwordErrors = checkField(
-      [
-        {
-          type: IConditionKey.REQUIRED,
-          message: "Field Password is required",
-        },
-        {
-          type: IConditionKey.MIN_LENGTH,
-          message: "Field Password must be more than 6 characters",
-          value: 6,
-        },
-      ],
-      password,
-    );
+    const displayNameErrors = checkField(validations.displayName, displayName);
+    const emailErrors = checkField(validations.email, email);
+    const passwordErrors = checkField(validations.password, password);
     const errors = [].concat(passwordErrors, emailErrors, displayNameErrors);
     return (
       <div className="login-page">
@@ -83,7 +45,7 @@ class SignUp extends React.Component<{ signup; authError }> {
               <Header.Content>Create new account</Header.Content>
             </Header>
             <Form action="" method="get" className="ui large form">
-              <Segment textAlign="left" stacked >
+              <Segment textAlign="left" stacked>
                 <Form.Input
                   icon="user"
                   label="Your Name:"
